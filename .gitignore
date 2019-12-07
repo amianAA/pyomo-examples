@@ -1,7 +1,8 @@
 sudoku/.idea/
 sudoku/.vagrant/
 sudoku/src/__pycache__/
+sudoku/src/parse_table_datacmds.py
 shares/.idea/
 shares/.vagrant/
 shares/src/__pycache__/
-
+shares/src/parse_table_datacmds.py
