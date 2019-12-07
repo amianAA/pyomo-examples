@@ -1,0 +1,26 @@
+Vagrant.configure("2") do |config|
+
+  # VARIABLES
+  box = "bento/ubuntu-18.04"
+  ip_address = "10.10.0.255"
+  project_name = "Sudoku"
+  memory = 1024
+  cpus = 2
+
+  config.vm.box = box
+  config.vm.hostname = project_name
+
+  config.vm.provider "virtualbox" do |v|
+	v.name = project_name
+	v.memory = memory
+	v.cpus = cpus
+  end
+
+  config.vm.provision "shell", 
+    run: "once",
+    path: "./provision/provision.sh"	
+
+  config.vm.network "private_network", ip: ip_address
+  config.vm.synced_folder "./src", "/src"
+
+end

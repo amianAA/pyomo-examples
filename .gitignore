@@ -1,0 +1,7 @@
+sudoku/.idea/
+sudoku/.vagrant/
+sudoku/src/__pycache__/
+shares/.idea/
+shares/.vagrant/
+shares/src/__pycache__/
+
