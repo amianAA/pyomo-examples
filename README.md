@@ -1,15 +1,14 @@
-# Examples of Pyomo usage
+# Pyomo examples
 This repo is intended to serve as an example of Pyomo usage. There are two folders, each one has a Vagrantfile in order to get instantiated each example on different environments.
 
 ## Requirements
-Vagrant >= 2.0
-Ansible >= 2.8
-
-## Sudoku
-This one is an example of Pyomo abstract model usage.
+- Vagrant >= 2.0
 
 ## Shares
-This case is developed under a Pyomo concrete model.
+An optimization problem case developed under a Pyomo concrete model.
+
+## Sudoku
+An assignment problem solved with Pyomo abstract model.
 
 ## Instructions
 
