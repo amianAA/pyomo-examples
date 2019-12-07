@@ -15,16 +15,16 @@ def optimise():
         output = ''
         for (i, j), v in getattr(instance.x, '_data').items():
             if i in (1, 4, 7) and j == 1:
-                output += '-------------\n'
+                output += ' -----------------------------\n'
             if j in (1, 4, 7):
                 output += '|'
-            output += f'{int(v.value)}'
+            output += f' {int(v.value)} '
             if j == 9:
                 output += '|\n'
-        output += '-------------'
-        print(f'Solution:\n {output} \n\n Time spent: {time_spent} s')
+        output += '------------------------------'
+        print(f'Solution:\n{output} \n\n Time spent: {time_spent} s')
     else:
-        print(response['Solver'][0]['Termination message'])
+        print(f'{response["Solver"][0]["Termination message"]}. Please, review input data')
 
 
 optimise()

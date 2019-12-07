@@ -1,10 +1,12 @@
 from pyomo.environ import *
 
 
-model = AbstractModel()
 data = DataPortal()
-data.load(filename='aux_data.dat')
-data.load(filename='data_input.csv', param='A')
+data.load(filename='data/model_data.dat')
+data.load(filename='data/formatted_data_input.csv', param='A')
+
+model = AbstractModel()
+
 # Index to iterate over variables
 model.i = Set()
 model.j = Set()
