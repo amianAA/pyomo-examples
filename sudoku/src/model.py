@@ -1,28 +1,37 @@
 from pyomo.environ import *
 
-
+"""
+Data sources
+"""
 data = DataPortal()
 data.load(filename='data/model_data.dat')
 data.load(filename='data/formatted_data_input.csv', param='A')
 
+
+"""
+Variables, indexes and sets
+"""
 model = AbstractModel()
 
-# Index to iterate over variables
+# Indexes to iterate over variables
 model.i = Set()
 model.j = Set()
 model.k = Set()
 model.r = Set()
 model.s = Set()
 
-# Aux params:
+# Data input:
 # A: 1 if i,j,k has a value, 0 otherwise
-# xBI: bounds for sum(i) on squares
-# xBJ: bounds for sum(i) on squares
 model.A = Param(model.i, model.j, within=NonNegativeIntegers, initialize=data['A'], default=0)
 
 # Variables
 model.x = Var(model.i, model.j, domain=NonNegativeIntegers)
 model.delta = Var(model.i, model.j, model.k, domain=Boolean)
+
+
+"""
+Generators
+"""
 
 
 # Constraint: Only one value of each K for each column
@@ -47,13 +56,14 @@ def square_constraints(model, r, s, k):
     return sum(sum(model.delta[i, j, k] for j in j_range) for i in i_range) == 1
 
 
-# Low bound
+# variable bounds
 def bound_constraints(model, i, j):
     if model.A[i, j] != 0:
         return model.x[i, j] == model.A[i, j]
     return inequality(1, model.x[i, j], 9)
 
 
+# x-delta relation
 def delta_x_constraints(model, i, j):
     return model.x[i, j] == sum(k * model.delta[i, j, k] for k in model.k)
 
@@ -62,6 +72,9 @@ def objective_function(model):
     return summation(model.x)
 
 
+"""
+Constraints and Objective Function
+"""
 # Generating constraints into the model
 model.col_constraints = Constraint(model.j, model.k, rule=col_constraints)
 model.row_constraints = Constraint(model.i, model.k, rule=row_constraints)
